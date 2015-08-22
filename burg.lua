@@ -19,9 +19,9 @@ function burg.new(x,y)
   new.points = 100.0
   new.walls = {}
   new.walls.b = {}
-  new.walls.b.l = love.physics.newBody(world, x, y) --left wall
-  new.walls.b.r = love.physics.newBody(world, x + burg.size, y) --right wall
-  new.walls.b.g = love.physics.newBody(world, x, y + burg.size) --ground
+  new.walls.b.l = love.physics.newBody(world, x + burg.wallsize/2, y- burg.size/2) --left wall
+  new.walls.b.r = love.physics.newBody(world, x + burg.size + burg.wallsize/2, y- burg.size/2) --right wall
+  new.walls.b.g = love.physics.newBody(world, x + burg.size/2 + burg.wallsize/2, y) --+ burg.size) --ground
 
   new.walls.s = {}
   new.walls.s.l = love.physics.newRectangleShape(burg.wallsize, burg.size) 
