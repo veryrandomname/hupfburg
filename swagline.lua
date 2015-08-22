@@ -1,10 +1,9 @@
-
-local BLOCKSIZE = 20
-local DISTANCE = BLOCKSIZE*1.3
-
 local swagline = {}
 
-function swagline.new(length, x, y)
+function swagline.new(length, width, x, y)
+  local BLOCKSIZE = width/length
+  local DISTANCE = BLOCKSIZE*1.3
+
   local nl = {}
 
   for i=1, length do
