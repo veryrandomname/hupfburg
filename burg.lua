@@ -58,5 +58,6 @@ function burg.draw()
 	  --love.graphics.rectangle( "fill", v.walls.b.g:getX(), v.walls.b.g:getY(), burg.size, burg.wallsize)
 	end
 end
-print("return")
+
+
 return burg 
