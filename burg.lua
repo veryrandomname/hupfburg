@@ -17,7 +17,7 @@ function burg.load(x,y)
 end
 function burg.new(x,y)
   local new = {}
-  new.points = 100.0
+  new.points = 0
   new.walls = {}
   new.walls.b = {}
   new.walls.b.l = love.physics.newBody(world, x + burg.wallsize/2, y- burg.size/2) --left wall

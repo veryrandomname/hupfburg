@@ -56,8 +56,8 @@ function love.draw()
   love.graphics.translate( mx - 400, my - 300 )
 
   love.graphics.setColor(255,255,255)
-  love.graphics.print("3 Points",50,20)
-  love.graphics.print("5 Points",600,20)
+  love.graphics.print(burgen[1].points .. " Points", 50, 20)
+  love.graphics.print(burgen[2].points .. " Points", 600, 20 )
 
   burg.draw()
 
@@ -67,8 +67,6 @@ function love.draw()
     bomb.draw(v)
   end
 
-  love.graphics.print("Player 2:" .. " " .. burgen[2].points, 20, 20, 0, 2, 2 )
-  love.graphics.print("Player 1:" .. " " .. burgen[1].points, love.graphics.getWidth()/2, 20, 0, 2, 2 )
   love.graphics.pop()
 
 end
@@ -77,7 +75,7 @@ function beginContact(a, b, coll)
   for i,v in ipairs(burgen) do
     if (a == v.coll.f or b == v.coll.f) and not (b:getCategory() == 3 or a:getCategory() == 3) then
       if a == burgen[i].coll.f or b == burgen[i].coll.f then
-        burgen[i].points = burgen[i].points - 1.0
+        burgen[i].points = burgen[i].points + 1
         for k, w in ipairs(bombs) do
           if b == w.fixture or a == w.fixture then
             --destroy fixture and body
@@ -87,8 +85,6 @@ function beginContact(a, b, coll)
           end
         end
       end
-      print("Points:")
-      print("Player 1:" .. " " .. burgen[1].points .. " " .."Player 2:" .. " " .. burgen[2].points)
     end
   end  
 end
