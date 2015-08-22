@@ -16,6 +16,9 @@ local function getBombedAway(x,y)
 end
 
 function love.load()
+  local font = love.graphics.newFont( "HappyFox-Condensed.otf", 80 )
+  love.graphics.setFont(font);
+
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 9.81*64, true)
   world:setCallbacks( beginContact)
@@ -52,6 +55,10 @@ function love.draw()
 
   love.graphics.translate( mx - 400, my - 300 )
 
+  love.graphics.setColor(255,255,255)
+  love.graphics.print("3 Points",50,20)
+  love.graphics.print("5 Points",600,20)
+
   burg.draw()
 
   swagline.draw(swag)
@@ -60,6 +67,7 @@ function love.draw()
     bomb.draw(v)
   end
   love.graphics.pop()
+
 end
 
 function beginContact(a, b, coll)
@@ -98,6 +106,12 @@ function love.keypressed(key)
     local b = bomb.new(100,250,10)
     b.body:setMass(0.5)
     b.body:applyLinearImpulse(200,50)
+    b.explodes = true
+    table.insert(bombs,b)
+  elseif key == "u" then
+    local b = bomb.new(700,250,10)
+    b.body:setMass(0.5)
+    b.body:applyLinearImpulse(-200,50)
     b.explodes = true
     table.insert(bombs,b)
   elseif key == "w" then
