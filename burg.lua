@@ -38,12 +38,24 @@ function burg.new(x,y)
   new.coll.s = love.physics.newRectangleShape(burg.size, burg.size)
   new.coll.f = love.physics.newFixture(new.coll.b, new.coll.s)
   new.coll.f:setSensor(true)
+  new.coll.f:setCategory(2)
+  new.coll.f:setMask(3)
   return new
 
 end
 function burg.update(dt)
 
 
+
+
+end
+
+function beginContact(a, b, coll)
+  for i,v in ipairs(burgen) do
+    if (a == v.coll.f or b == v.coll.f) and not (b:getCategory() == 3 or a:getCategory() == 3) then
+        print("lolloolk,")
+    end
+  end  
 
 
 end

@@ -16,7 +16,8 @@ function swagline.new(length, width, x, y)
     end
     n.shape = love.physics.newCircleShape(BLOCKSIZE)
     n.fixture = love.physics.newFixture(n.body, n.shape)
-   
+    n.fixture:setCategory(3)
+    n.fixture:setMask(2)
     table.insert(nl,n)
 
     if i > 1 then

@@ -7,6 +7,7 @@ local bombs = {}
 function love.load()
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 9.81*64, true)
+  world:setCallbacks( beginContact)
   burg.load(0,-100)
 
   swag = swagline.new(50,450,100,300)
