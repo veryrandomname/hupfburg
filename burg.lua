@@ -6,7 +6,7 @@ players = {}
 
 function burg.load()
   love.physics.setMeter(64) --the height of a meter our worlds will be 64px
-  world = love.physics.newWorld(0, 9.81*64, true)
+
   burgen = {burg.new(love.graphics.getWidth()- burg.size- burg.wallsize ,love.graphics.getHeight() - burg.wallsize- burg.size),
 burg.new(0 ,love.graphics.getHeight()- burg.wallsize - burg.size)}
 
@@ -15,6 +15,7 @@ burg.new(0 ,love.graphics.getHeight()- burg.wallsize - burg.size)}
 end
 function burg.new(x,y)
   local new = {}
+  new.points = 100.0
   new.walls = {}
   new.walls.b = {}
   new.walls.b.l = love.physics.newBody(world, x, y) --left wall
@@ -24,7 +25,7 @@ function burg.new(x,y)
   new.walls.s = {}
   new.walls.s.l = love.physics.newRectangleShape(burg.wallsize, burg.size) 
   new.walls.s.r = love.physics.newRectangleShape(burg.wallsize, burg.size)
-  new.walls.s.g = love.physics.newRectangleShape(burg.size, burg.wallsize)
+  new.walls.s.g = love.physics.newRectangleShape(burg.size+ burg.wallsize, burg.wallsize)
 
   new.walls.f = {}
   new.walls.f.l = love.physics.newFixture(new.walls.b.l, new.walls.s.l) --attach shape to body
@@ -40,7 +41,7 @@ function burg.new(x,y)
 
 end
 function burg.update(dt)
-  world:update(dt)
+
 
 
 
