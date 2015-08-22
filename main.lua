@@ -28,6 +28,26 @@ function love.draw()
   end
 end
 
+function beginContact(a, b, coll)
+  for i,v in ipairs(burgen) do
+    if (a == v.coll.f or b == v.coll.f) and not (b:getCategory() == 3 or a:getCategory() == 3) then
+      if a == burgen[i].coll.f or b == burgen[i].coll.f then
+        burgen[i].points = burgen[i].points - 1.0
+        for k, w in ipairs(bombs) do
+          if b == w.fixture or a == w.fixture then
+            --destroy fixture and body
+            w.fixture:destroy()
+            w.body:destroy()
+            table.remove(bombs, k)
+          end
+        end
+      end
+      print("Points:")
+      print("Player 1:" .. " " .. burgen[1].points .. " " .."Player 2:" .. " " .. burgen[2].points)
+    end
+  end  
+end
+
 function love.keypressed(key)
   swagline.keypressed(swag,key)
   if key == " " then

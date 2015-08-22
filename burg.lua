@@ -34,7 +34,7 @@ function burg.new(x,y)
   new.walls.f.g = love.physics.newFixture(new.walls.b.g, new.walls.s.g) --attach shape to body
 
   new.coll = {}
-  new.coll.b = love.physics.newBody(world, x, y)
+  new.coll.b = love.physics.newBody(world, x + burg.size/2 + burg.wallsize/2, y - burg.size/2)
   new.coll.s = love.physics.newRectangleShape(burg.size, burg.size)
   new.coll.f = love.physics.newFixture(new.coll.b, new.coll.s)
   new.coll.f:setSensor(true)
@@ -50,21 +50,17 @@ function burg.update(dt)
 
 end
 
-function beginContact(a, b, coll)
-  for i,v in ipairs(burgen) do
-    if (a == v.coll.f or b == v.coll.f) and not (b:getCategory() == 3 or a:getCategory() == 3) then
-        print("lolloolk,")
-    end
-  end  
 
 
-end
 function burg.draw()
   --print("lol")
 	for i, v in pairs(burgen) do
+    love.graphics.setColor(250, 150, 15)    
     love.graphics.polygon( "fill", v.walls.b.g:getWorldPoints(v.walls.s.g:getPoints()) )
     love.graphics.polygon( "fill", v.walls.b.l:getWorldPoints(v.walls.s.l:getPoints()) )
     love.graphics.polygon( "fill", v.walls.b.r:getWorldPoints(v.walls.s.r:getPoints()) )
+    love.graphics.setColor(150, 150, 15)    
+    love.graphics.polygon( "fill", v.coll.b:getWorldPoints(v.coll.s:getPoints()))
 	  --love.graphics.rectangle( "fill", v.walls.b.l:getX(), v.walls.b.l:getY(), burg.wallsize, burg.size)
 	  --love.graphics.rectangle( "fill", v.walls.b.r:getX(), v.walls.b.r:getY(), burg.wallsize, burg.size)
 	  --love.graphics.rectangle( "fill", v.walls.b.g:getX(), v.walls.b.g:getY(), burg.size, burg.wallsize)
