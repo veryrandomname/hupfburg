@@ -28,6 +28,7 @@ function love.load()
   bomb1 = love.graphics.newImage("bomb1.png")
   bubble1 = love.graphics.newImage("bubble1.png")
   love.graphics.setBackgroundColor(27, 178, 228)
+
 end
 
 function love.update(dt)
@@ -52,8 +53,9 @@ end
 
 function love.draw()
   local mx,my = swag[math.floor(#swag/2)].body:getPosition()
-  love.graphics.push()
 
+  local w,h = love.graphics.getDimensions()
+  love.graphics.scale(w/800,h/600)
   love.graphics.translate( mx - 400, my - 300 )
 
   love.graphics.setColor(255,255,255)
@@ -67,8 +69,6 @@ function love.draw()
   for i,v in ipairs(bombs) do
     bomb.draw(v)
   end
-
-  love.graphics.pop()
 
 end
 
@@ -126,6 +126,13 @@ function love.keypressed(key)
     table.insert(bombs,b)
   elseif key == "escape" then
     love.event.quit()
+  elseif key == "f" then
+    if not love.window.getFullscreen() then
+      local w,h = love.window.getDesktopDimensions()
+      love.window.setMode( w, h, {fullscreen = true} )
+    else
+      love.window.setMode( 800,600 )
+    end
   end
 end
 

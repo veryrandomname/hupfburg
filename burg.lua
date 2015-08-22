@@ -9,8 +9,12 @@ function burg.load(x,y)
   love.physics.setMeter(64) --the height of a meter our worlds will be 64px
   --print(love.graphics.getWidth())
 
+  --[[
   burgen = {burg.new(x + love.graphics.getWidth()- burg.size- burg.wallsize ,y + love.graphics.getHeight() - burg.wallsize- burg.size),
             burg.new(x, y + love.graphics.getHeight()- burg.wallsize - burg.size)}
+            --]]
+  burgen = {burg.new(x + 800 - burg.size- burg.wallsize ,y + 600 - burg.wallsize- burg.size),
+            burg.new(x, y + 600 - burg.wallsize - burg.size)}
 
 
 
