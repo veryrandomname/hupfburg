@@ -6,6 +6,8 @@ function bomb.new(x,y,r)
   n.shape = love.physics.newCircleShape( r )
   n.fixture = love.physics.newFixture(n.body,n.shape)
 
+  n.age = 0
+
   return n
 end
 
