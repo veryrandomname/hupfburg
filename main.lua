@@ -19,6 +19,10 @@ function love.load()
   local font = love.graphics.newFont( "HappyFox-Condensed.otf", 80 )
   love.graphics.setFont(font);
 
+  local music = love.audio.newSource("Grossman_Ewell_Grainger_-_03_-_Bozza_Duettino_for_Two_Bassoons.mp3")
+  music:setLooping(true)
+  music:play()
+
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 9.81*64, true)
   world:setCallbacks( beginContact)
