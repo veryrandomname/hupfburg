@@ -4,11 +4,12 @@ burg.size = 100
 burg.wallsize = 15
 players = {}
 
-function burg.load()
+function burg.load(x,y)
+  x,y = x or 0, y or 0
   love.physics.setMeter(64) --the height of a meter our worlds will be 64px
 
-  burgen = {burg.new(love.graphics.getWidth()- burg.size- burg.wallsize ,love.graphics.getHeight() - burg.wallsize- burg.size),
-burg.new(0 ,love.graphics.getHeight()- burg.wallsize - burg.size)}
+  burgen = {burg.new(x + love.graphics.getWidth()- burg.size- burg.wallsize ,y + love.graphics.getHeight() - burg.wallsize- burg.size),
+            burg.new(x, y + love.graphics.getHeight()- burg.wallsize - burg.size)}
 
 
 
