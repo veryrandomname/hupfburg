@@ -49,10 +49,13 @@ function burg.update(dt)
 end
 function burg.draw()
   --print("lol")
-	for i, v in pairs(burgen) do    
-	  love.graphics.rectangle( "fill", v.walls.b.l:getX(), v.walls.b.l:getY(), burg.wallsize, burg.size)
-	  love.graphics.rectangle( "fill", v.walls.b.r:getX(), v.walls.b.r:getY(), burg.wallsize, burg.size)
-	  love.graphics.rectangle( "fill", v.walls.b.g:getX(), v.walls.b.g:getY(), burg.size, burg.wallsize)
+	for i, v in pairs(burgen) do
+    love.graphics.polygon( "fill", v.walls.b.g:getWorldPoints(v.walls.s.g:getPoints()) )
+    love.graphics.polygon( "fill", v.walls.b.l:getWorldPoints(v.walls.s.l:getPoints()) )
+    love.graphics.polygon( "fill", v.walls.b.r:getWorldPoints(v.walls.s.r:getPoints()) )
+	  --love.graphics.rectangle( "fill", v.walls.b.l:getX(), v.walls.b.l:getY(), burg.wallsize, burg.size)
+	  --love.graphics.rectangle( "fill", v.walls.b.r:getX(), v.walls.b.r:getY(), burg.wallsize, burg.size)
+	  --love.graphics.rectangle( "fill", v.walls.b.g:getX(), v.walls.b.g:getY(), burg.size, burg.wallsize)
 	end
 end
 print("return")
