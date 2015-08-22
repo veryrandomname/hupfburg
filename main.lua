@@ -66,6 +66,9 @@ function love.draw()
   for i,v in ipairs(bombs) do
     bomb.draw(v)
   end
+
+  love.graphics.print("Player 2:" .. " " .. burgen[2].points, 20, 20, 0, 2, 2 )
+  love.graphics.print("Player 1:" .. " " .. burgen[1].points, love.graphics.getWidth()/2, 20, 0, 2, 2 )
   love.graphics.pop()
 
 end
