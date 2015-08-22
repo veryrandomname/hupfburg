@@ -26,6 +26,7 @@ function love.load()
 
   swag = swagline.new(50,450,100,300)
   bomb1 = love.graphics.newImage("bomb1.png")
+  bubble1 = love.graphics.newImage("bubble1.png")
   love.graphics.setBackgroundColor(27, 178, 228)
 end
 
