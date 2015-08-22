@@ -4,6 +4,17 @@ local bomb = require 'bomb'
 
 local bombs = {}
 
+local function getBombedAway(x,y)
+  return function(f)
+    local x2,y2 = f:getBody():getPosition()
+    local dx,dy = x2-x,y2-y
+    local l = math.sqrt( math.pow(dx,2) + math.pow(dy,2) )
+    dx,dy = dx/l, dy/l
+    f:getBody():applyLinearImpulse(dx*10000,dy*10000)
+    return false
+  end
+end
+
 function love.load()
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 9.81*64, true)
@@ -16,6 +27,20 @@ end
 function love.update(dt)
   world:update(dt)
   burg.update(dt)
+  swagline.update(swag,dt)
+
+  for i,v in ipairs(bombs) do
+    v.age = v.age + dt
+    if v.age > 5 then
+      if v.explodes then
+        local x,y = v.body:getX(), v.body:getY()
+        world:queryBoundingBox( x-100, y-100, x+100, y+100, getBombedAway(x,y)) 
+      end
+      v.fixture:destroy()
+      v.body:destroy()
+      table.remove(bombs,i)
+    end
+  end
 end
 
 function love.draw()
@@ -51,8 +76,35 @@ function beginContact(a, b, coll)
 end
 
 function love.keypressed(key)
-  swagline.keypressed(swag,key)
-  if key == " " then
-    table.insert(bombs,bomb.new(300,100,30))
+  --swagline.keypressed(swag,key)
+  if key == "q" then
+    local b = bomb.new(100,250,10)
+    b.body:setMass(0.5)
+    b.body:applyLinearImpulse(200,50)
+    table.insert(bombs,b)
+  elseif key == "o" then
+    local b = bomb.new(700,250,10)
+    b.body:setMass(0.5)
+    b.body:applyLinearImpulse(-200,50)
+    table.insert(bombs,b)
+  elseif key == "e" then
+    local b = bomb.new(100,250,10)
+    b.body:setMass(0.5)
+    b.body:applyLinearImpulse(200,50)
+    b.explodes = true
+    table.insert(bombs,b)
+  elseif key == "w" then
+    local b = bomb.new(100,250,20)
+    b.body:setMass(1)
+    b.body:applyLinearImpulse(200,50)
+    table.insert(bombs,b)
+  elseif key == "i" then
+    local b = bomb.new(700,250,20)
+    b.body:setMass(1)
+    b.body:applyLinearImpulse(-200,50)
+    table.insert(bombs,b)
+  elseif key == "escape" then
+    love.event.quit()
   end
 end
+

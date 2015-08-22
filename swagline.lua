@@ -4,7 +4,7 @@ function swagline.new(length, width, x, y)
   local BLOCKSIZE = width/length
   local DISTANCE = BLOCKSIZE*1.3
 
-  local nl = {}
+  local nl = {x=x,y=y}
 
   for i=1, length do
     local n = {}
@@ -48,13 +48,30 @@ local function keyToPosition(key,l)
 
   return math.floor(n*((l-2)/10))
 end
+function swagline.update(swg,dt)
+  for i,v in ipairs(swg) do
+    local d = swg.y - v.body:getY()
+    v.body:applyForce(0,d*5)
+  end
 
+  for i,v in ipairs({"1","2","3","4","5","6","7","8","9","0"}) do
+    if love.keyboard.isDown(v) then
+      local n = keyToPosition(v,#swg)
+      if n then
+        swg[n].body:applyForce( 0, -10000 )
+      end
+    end
+  end
+end
+
+--[[
 function swagline.keypressed(swg,key)
   local n = keyToPosition(key,#swg) -- TODO: #swg is evil
   if n then
-    swg[n].body:applyLinearImpulse( 0, -500 )
+    swg[n].body:applyLinearImpulse( 0, -200 )
   end
 end
+--]]
 
 
 return swagline
