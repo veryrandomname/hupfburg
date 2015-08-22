@@ -22,6 +22,8 @@ function love.load()
   burg.load(0,-100)
 
   swag = swagline.new(50,450,100,300)
+
+  love.graphics.setBackgroundColor(27, 178, 228)
 end
 
 function love.update(dt)
@@ -41,9 +43,15 @@ function love.update(dt)
       table.remove(bombs,i)
     end
   end
+
 end
 
 function love.draw()
+  local mx,my = swag[math.floor(#swag/2)].body:getPosition()
+  love.graphics.push()
+
+  love.graphics.translate( mx - 400, my - 300 )
+
   burg.draw()
 
   swagline.draw(swag)
@@ -51,8 +59,11 @@ function love.draw()
   for i,v in ipairs(bombs) do
     bomb.draw(v)
   end
+
   love.graphics.print("Player 2:" .. " " .. burgen[2].points, 20, 20, 0, 2, 2 )
   love.graphics.print("Player 1:" .. " " .. burgen[1].points, love.graphics.getWidth()/2, 20, 0, 2, 2 )
+  love.graphics.pop()
+
 end
 
 function beginContact(a, b, coll)

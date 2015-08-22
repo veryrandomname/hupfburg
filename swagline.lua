@@ -32,9 +32,9 @@ function swagline.draw(swg)
   local m = #swg/2
   for i,v in ipairs(swg) do
     if i > m then
-      love.graphics.setColor(200,100,120)
+      love.graphics.setColor(222,250,13)
     else
-      love.graphics.setColor(100,200,120)
+      love.graphics.setColor(100,250,120)
     end
     --love.graphics.polygon("fill", v.body:getWorldPoints(v.shape:getPoints()))
     love.graphics.circle("fill", v.body:getX(), v.body:getY(), v.shape:getRadius())
