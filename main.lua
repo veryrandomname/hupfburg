@@ -65,6 +65,9 @@ function love.draw()
   love.graphics.setColor(255,255,255)
   love.graphics.print(burgen[1].points .. " Points", 50, 20)
   love.graphics.print(burgen[2].points .. " Points", 600, 20 )
+  if winner then
+    love.graphics.print("Winner!", 50 + 550*(winner-1), 90 )
+  end
 
   burg.draw()
 
@@ -81,6 +84,12 @@ function beginContact(a, b, coll)
     if (a == v.coll.f or b == v.coll.f) and not (b:getCategory() == 3 or a:getCategory() == 3) then
       if a == burgen[i].coll.f or b == burgen[i].coll.f then
         burgen[i].points = burgen[i].points + 1
+
+        -- win condition
+        if burgen[i].points >= 20 and not winner then
+          winner = i
+        end
+
         for k, w in ipairs(bombs) do
           if b == w.fixture or a == w.fixture then
             --destroy fixture and body
